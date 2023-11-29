@@ -12,17 +12,17 @@ struct ContentView: View {
         TabView {
             CharacterListView(viewModel: CharacterListViewModel())
                 .tabItem {
-                    Image(systemName: "tv")
+                    Image(systemName: "person")
                     Text("Characters")
                 }
             LocationsView()
                 .tabItem {
-                    Image(systemName: "magnifyingglass")
+                    Image(systemName: "location")
                     Text("Locations")
                 }
             EpisodesView()
                 .tabItem {
-                    Image(systemName: "magnifyingglass")
+                    Image(systemName: "tv")
                     Text("Episodes")
                 }
             SearchView()

@@ -8,36 +8,37 @@
 import SwiftUI
 
 struct CharacterCell: View {
-    let image: String
-    let name: String
-    let status: String
+    
+    let character: Character?
     let infoHelper = InfoHelper()
     
     var body: some View {
-        VStack {
-            AsyncImage(url: URL(string: image)) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
+        NavigationLink(destination: CharacterDetailView(viewModel: CharacterDetailViewModel(character: character))) {
+            VStack {
+                AsyncImage(url: URL(string: character?.image ?? "")) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .scaledToFill()
+                .frame(width: 140, height: 140)
+                .cornerRadius(10)
+                .shadow(radius: 5)
+                
+                Text(character?.name ?? "")
+                    .foregroundStyle(.black)
+                    .lineLimit(1)
             }
-            .scaledToFill()
-            .frame(width: 140, height: 140)
-            .cornerRadius(10)
-            .shadow(radius: 5)
-            
-            Text(name)
-                .foregroundStyle(.black)
-                .lineLimit(1)
-        }
-        .frame(width: 165, height: 200)
-        .overlay(
+            .frame(width: 165, height: 200)
+            .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(infoHelper.setUpBorderColor(status: status), lineWidth: 5)
+                    .stroke(infoHelper.setUpBorderColor(status: character?.status), lineWidth: 5)
             )
-        .cornerRadius(10)
+            .cornerRadius(10)
+        }
     }
 }
 
 #Preview {
-    CharacterCell(image: "", name: "Juan", status: "Alive")
+    CharacterCell(character: Character(id: 1, name: "Pepe", status: "Alive", species: "", type: "", gender: "", origin: Origin(name: "", url: ""), location: Location(name: "", url: ""), image: "", episode: [], url: ""))
 }

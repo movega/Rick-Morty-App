@@ -12,20 +12,21 @@ struct LocationDetailViewCell: View {
     var location: Locations?
     
     var body: some View {
-        VStack {
-            LocationDetailComponent(title: "Name", text: location?.name)
-            LocationDetailComponent(title: "Type", text: location?.type)
-            LocationDetailComponent(title: "Dimension", text: location?.dimension)
-            LocationDetailComponent(title: "Creation", text: location?.created)
+        NavigationLink(destination: LocationDetailView(viewModel: LocationDetailViewModel(location: location))) {
+            VStack {
+                LocationDetailComponent(title: "Name", text: location?.name)
+                LocationDetailComponent(title: "Type", text: location?.type)
+                LocationDetailComponent(title: "Dimension", text: location?.dimension)
+                LocationDetailComponent(title: "Creation", text: location?.created)
+            }
+            .frame(width: 350, height: 200)
+            .shadow(radius: 5)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.black, lineWidth: 2)
+            )
         }
-        .frame(width: 350, height: 200)
-        .shadow(radius: 5)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.black, lineWidth: 2)
-                )
-        
     }
 }
 

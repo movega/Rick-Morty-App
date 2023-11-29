@@ -11,18 +11,20 @@ struct EpisodeDetailViewCell: View {
     var episode: Episodes?
     
     var body: some View {
-        VStack {
-            EpisodeDetailComponent(title: "Episode", text: episode?.episode)
-            EpisodeDetailComponent(title: "Name", text: episode?.name)
-            EpisodeDetailComponent(title: "Air dated", text: episode?.air_date)
+        NavigationLink(destination: EpisodesDetailView(viewModel: EpisodesDetailViewModel(episode: episode))) {
+            VStack {
+                EpisodeDetailComponent(title: "Episode", text: episode?.episode)
+                EpisodeDetailComponent(title: "Name", text: episode?.name)
+                EpisodeDetailComponent(title: "Air dated", text: episode?.air_date)
+            }
+            .frame(width: 350, height: 150)
+            .shadow(radius: 5)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.black, lineWidth: 2)
+            )
         }
-        .frame(width: 350, height: 150)
-        .shadow(radius: 5)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.black, lineWidth: 2)
-                )
     }
 }
 

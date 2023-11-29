@@ -26,6 +26,7 @@ struct LocationDetailView: View {
         }.onAppear {
             viewModel.loadMultipleCharacters(url: viewModel.location?.residents.first ?? "")
         }
+        .navigationTitle(viewModel.location?.name ?? "")
     }
 }
 

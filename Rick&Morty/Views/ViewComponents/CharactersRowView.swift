@@ -15,7 +15,7 @@ struct CharactersRowView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack {
                 ForEach(characters ?? []) { character in
-                    CharacterCell(image: character.image, name: character.name, status: character.status)
+                    CharacterCell(character: character)
                 }
             }
         }

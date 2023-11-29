@@ -15,11 +15,9 @@ struct LocationsView: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading) {
-                    infoHelper.sectionTitle("Episodes")
+                    infoHelper.sectionTitle("Locations")
                     ForEach(viewModel.locations) { location in
-                        NavigationLink(destination: LocationDetailView(viewModel: LocationDetailViewModel(location: location))) {
-                            LocationDetailViewCell(location: location)
-                        }
+                        LocationDetailViewCell(location: location)
                     }
                 }
                 .padding()

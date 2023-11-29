@@ -20,7 +20,7 @@ struct CharacterDetailView: View {
                 } placeholder: {
                     ProgressView()
                 }
-                .scaledToFill()
+                .scaledToFit()
                 .frame(width: .infinity, height: 300)
                 .cornerRadius(10)
                 .shadow(radius: 5)
@@ -46,6 +46,7 @@ struct CharacterDetailView: View {
             viewModel.loadLocation(url: viewModel.character?.location.url ?? "")
             viewModel.loadMultipleEpisodes(url: viewModel.character?.episode ?? [])
         }
+        .navigationTitle(viewModel.character?.name ?? "")
     }
 }
 

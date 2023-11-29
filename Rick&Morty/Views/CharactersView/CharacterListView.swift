@@ -26,18 +26,16 @@ struct CharacterListView: View {
             }
         }
     }
-
+    
     private var characterGrid: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
             ForEach(viewModel.characters) { character in
-                NavigationLink(destination: CharacterDetailView(viewModel: CharacterDetailViewModel(character: character))) {
-                    CharacterCell(image: character.image, name: character.name, status: character.status)
-                }
+                CharacterCell(character: character)
             }
         }
         .padding(.horizontal)
     }
-
+    
 }
 
 #Preview {

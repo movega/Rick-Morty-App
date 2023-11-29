@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct InfoHelper {
-    public func setUpBorderColor(status: String) -> Color {
+    public func setUpBorderColor(status: String?) -> Color {
         switch status {
         case "Alive":
             return Color.green

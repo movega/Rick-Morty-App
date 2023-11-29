@@ -24,6 +24,7 @@ struct EpisodesDetailView: View {
         }.onAppear {
             viewModel.loadMultipleCharacters(url: viewModel.episode?.characters.first ?? "")
         }
+        .navigationTitle(viewModel.episode?.name ?? "")
     }
 }
 
