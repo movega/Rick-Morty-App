@@ -16,7 +16,7 @@ struct CharacterListView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     infoHelper.sectionTitle("Characters")
-                    characterGrid
+                    CharacterColumnsView(characters: viewModel.characters)
                 }
                 .padding()
             }
@@ -27,14 +27,6 @@ struct CharacterListView: View {
         }
     }
     
-    private var characterGrid: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(viewModel.characters) { character in
-                CharacterCell(character: character)
-            }
-        }
-        .padding(.horizontal)
-    }
     
 }
 

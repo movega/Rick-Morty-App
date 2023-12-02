@@ -21,10 +21,10 @@ struct LocationDetailView: View {
                 CharacterDetailViewCell(title: "Type", text: viewModel.location?.created)
                 
                 infoHelper.sectionTitle("Characters")
-                CharactersRowView(characters: viewModel.character)
+                CharacterColumnsView(characters: viewModel.character)
             }
         }.onAppear {
-            viewModel.loadMultipleCharacters(url: viewModel.location?.residents.first ?? "")
+            viewModel.loadMultipleCharacters(url: viewModel.location?.residents ?? [])
         }
         .navigationTitle(viewModel.location?.name ?? "")
     }

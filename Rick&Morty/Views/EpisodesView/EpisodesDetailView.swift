@@ -19,10 +19,10 @@ struct EpisodesDetailView: View {
                 CharacterDetailViewCell(title: "Air dated", text: viewModel.episode?.air_date)
                 
                 infoHelper.sectionTitle("Characters")
-                CharactersRowView(characters: viewModel.character)
+                CharacterColumnsView(characters: viewModel.character)
             }
         }.onAppear {
-            viewModel.loadMultipleCharacters(url: viewModel.episode?.characters.first ?? "")
+            viewModel.loadMultipleCharacters(url: viewModel.episode?.characters ?? [])
         }
         .navigationTitle(viewModel.episode?.name ?? "")
     }

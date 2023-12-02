@@ -34,13 +34,14 @@ struct CharacterDetailView: View {
                 infoHelper.sectionTitle("Last seen")
                 LocationDetailViewCell(location: viewModel.location)
                 
+                infoHelper.sectionTitle("Appearances")
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(viewModel.episodes ?? []) { episode in
                             EpisodeDetailViewCell(episode: episode)
                         }
                     }
-                }
+                }.padding(.horizontal)
             }
         }.onAppear {
             viewModel.loadLocation(url: viewModel.character?.location.url ?? "")
@@ -48,5 +49,9 @@ struct CharacterDetailView: View {
         }
         .navigationTitle(viewModel.character?.name ?? "")
     }
+}
+
+#Preview {
+    CharacterDetailView()
 }
 

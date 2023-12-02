@@ -11,7 +11,6 @@ class LocationDetailViewModel: ObservableObject {
     @Published var character: [Character]?
     @Published var location: Locations?
     private let apiService: Manager
-    private let baseURL = "https://rickandmortyapi.com/api/episode/1,2,3"
     
     init(character: [Character]? = [], location: Locations? = nil, apiService: Manager = Manager()) {
         self.character = character
@@ -19,8 +18,8 @@ class LocationDetailViewModel: ObservableObject {
         self.apiService = apiService
     }
     
-    func loadMultipleCharacters(url: String) {
-        apiService.fetchMultipleCharacters(url: baseURL) { character in
+    func loadMultipleCharacters(url: [String]) {
+        apiService.fetchMultipleCharacters(urls: url) { character in
             self.character = character
         }
     }

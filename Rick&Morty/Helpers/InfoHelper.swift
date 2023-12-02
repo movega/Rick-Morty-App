@@ -8,17 +8,18 @@
 import Foundation
 import SwiftUI
 
-struct InfoHelper {
+class InfoHelper {
+    
     public func setUpBorderColor(status: String?) -> Color {
-        switch status {
-        case "Alive":
+        switch status?.lowercased() {
+        case "alive":
             return Color.green
-        case "Dead":
+        case "dead":
             return Color.red
-        case "Unknown":
+        case "unknown":
             return Color.yellow
         default:
-            return Color.yellow
+            return Color.blue
         }
     }
     
