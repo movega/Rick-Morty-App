@@ -26,7 +26,9 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack {
+                VStack(alignment: .leading) {
+                    infoHelper.sectionTitle("Search")
+                    
                     SearchBar(searchText: $searchText, isSearching: $isSearching)
                     
                     FilterRow(filters: viewModel.searchFilters, selectedFilter: $selectedFilter)
@@ -38,22 +40,23 @@ struct SearchView: View {
                         case "Locations":
                             SubfilterRow(filters: $locationFilters)
                         case "Episodes":
-                            SubfilterRow(filters: $characterFilters)
+                            SubfilterRow(filters: $episodeFilters)
                         default:
                             Spacer()
                         }
                     }
+                    
                     if isSearching {
                         if !hideCharacters ,!(viewModel.characters?.isEmpty ?? true) {
                             infoHelper.sectionTitle("Characters")
                             CharactersRowView(characters: viewModel.characters)
                         }
-
+                        
                         if !hideLocations, !(viewModel.locations?.isEmpty ?? true) {
                             infoHelper.sectionTitle("Locations")
                             LocationsRowView(locations: viewModel.locations)
                         }
-
+                        
                         if !hideEpisodes, !(viewModel.episodes?.isEmpty ?? true) {
                             infoHelper.sectionTitle("Episodes")
                             EpisodesRowView(episodes: viewModel.episodes)
@@ -62,41 +65,47 @@ struct SearchView: View {
                         Spacer()
                     }
                 }
-                .navigationTitle("Search")
+                .navigationBarTitle("Rick and Morty Universe", displayMode: .inline)
                 .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification)) { _ in
-                    if let selectedFilter = selectedFilter {
-                        switch selectedFilter.name {
-                        case "Characters":
-                            viewModel.filterCharacters(filters: characterFilters, searchText: searchText)
-                            hideCharacters = false
-                            hideLocations = true
-                            hideEpisodes = true
-                        case "Locations":
-                            viewModel.filterLocations(filters: locationFilters, searchText: searchText)
-                            hideCharacters = true
-                            hideLocations = false
-                            hideEpisodes = true
-                        case "Episodes":
-                            viewModel.filterEpisodes(filters: episodeFilters, searchText: searchText)
-                            hideCharacters = true
-                            hideLocations = true
-                            hideEpisodes = false
-                        default:
-                            break
-                        }
-                    } else {
-                        viewModel.filterCharacters(filters: characterFilters, searchText: searchText)
-                        viewModel.filterLocations(filters: locationFilters, searchText: searchText)
-                        viewModel.filterEpisodes(filters: episodeFilters, searchText: searchText)
-                        hideCharacters = false
-                        hideLocations = false
-                        hideEpisodes = false
-                    }
+                    performSearch()
                 }
+            }.background(Color.black)
+        }
+    }
+    
+    private func performSearch() {
+        if let selectedFilter = selectedFilter {
+            switch selectedFilter.name {
+            case "Characters":
+                viewModel.filterCharacters(filters: characterFilters, searchText: searchText)
+                hideCharacters = false
+                hideLocations = true
+                hideEpisodes = true
+            case "Locations":
+                viewModel.filterLocations(filters: locationFilters, searchText: searchText)
+                hideCharacters = true
+                hideLocations = false
+                hideEpisodes = true
+            case "Episodes":
+                viewModel.filterEpisodes(filters: episodeFilters, searchText: searchText)
+                hideCharacters = true
+                hideLocations = true
+                hideEpisodes = false
+            default:
+                break
             }
+        } else {
+            viewModel.filterCharacters(filters: characterFilters, searchText: searchText)
+            viewModel.filterLocations(filters: locationFilters, searchText: searchText)
+            viewModel.filterEpisodes(filters: episodeFilters, searchText: searchText)
+            hideCharacters = false
+            hideLocations = false
+            hideEpisodes = false
         }
     }
 }
+
+
 
 #Preview {
     SearchView()

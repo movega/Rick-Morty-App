@@ -14,9 +14,9 @@ struct EpisodesDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                CharacterDetailViewCell(title: "Episode", text: viewModel.episode?.episode)
-                CharacterDetailViewCell(title: "Name", text: viewModel.episode?.name)
-                CharacterDetailViewCell(title: "Air dated", text: viewModel.episode?.air_date)
+                DetailViewCell(title: "Episode", text: viewModel.episode?.episode)
+                DetailViewCell(title: "Name", text: viewModel.episode?.name)
+                DetailViewCell(title: "Air dated", text: viewModel.episode?.air_date)
                 
                 infoHelper.sectionTitle("Characters")
                 CharacterColumnsView(characters: viewModel.character)
@@ -25,6 +25,7 @@ struct EpisodesDetailView: View {
             viewModel.loadMultipleCharacters(url: viewModel.episode?.characters ?? [])
         }
         .navigationTitle(viewModel.episode?.name ?? "")
+        .background(Color.black)
     }
 }
 

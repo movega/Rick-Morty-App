@@ -9,8 +9,8 @@ import Foundation
 
 class Manager {
     
-    func fetchCharacters(completion: @escaping ([Character]) -> Void) {
-        guard let url = URL(string: "https://rickandmortyapi.com/api/character") else { return }
+    func fetchCharacters(page: Int, completion: @escaping ([Character]) -> Void) {
+        guard let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(page)") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data, error == nil else { return }
@@ -18,21 +18,6 @@ class Manager {
             do {
                 let apiResponse = try JSONDecoder().decode(CharacterResponse.self, from: data)
                 completion(apiResponse.results)
-            } catch {
-                print("Decoding error: \(error)")
-            }
-        }.resume()
-    }
-    
-    func fetchSingleCharacter(url: String, completion: @escaping (Character) -> Void) {
-        guard let url = URL(string: url) else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data, error == nil else { return }
-            
-            do {
-                let apiResponse = try JSONDecoder().decode(Character.self, from: data)
-                completion(apiResponse)
             } catch {
                 print("Decoding error: \(error)")
             }
@@ -77,8 +62,8 @@ class Manager {
         }
     }
     
-    func fetchLocations(completion: @escaping ([Locations]) -> Void) {
-        guard let url = URL(string: "https://rickandmortyapi.com/api/location") else { return }
+    func fetchLocations(page: Int, completion: @escaping ([Locations]) -> Void) {
+        guard let url = URL(string: "https://rickandmortyapi.com/api/location/?page=\(page)") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data, error == nil else { return }
@@ -139,8 +124,8 @@ class Manager {
         }
     }
     
-    func fetchEpisodes(completion: @escaping ([Episodes]) -> Void) {
-        guard let url = URL(string: "https://rickandmortyapi.com/api/episode") else { return }
+    func fetchEpisodes(page:Int, completion: @escaping ([Episodes]) -> Void) {
+        guard let url = URL(string: "https://rickandmortyapi.com/api/episode/?page=\(page)") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data, error == nil else { return }

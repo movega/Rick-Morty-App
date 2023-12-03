@@ -25,7 +25,20 @@ class InfoHelper {
     
     public func sectionTitle(_ title: String) -> some View {
         Text(title)
-            .font(.title)
-            .padding(.top, 16)
+            .font(.largeTitle)
+            .padding(.leading)
+            .foregroundStyle(Color.white)
+    }
+    
+    func transformDate(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+
+        if let date = dateFormatter.date(from: date) {
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            return dateFormatter.string(from: date)
+        } else {
+            return "Not recorded"
+        }
     }
 }

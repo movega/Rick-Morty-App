@@ -22,13 +22,17 @@ class CharacterDetailViewModel: ObservableObject {
     
     func loadLocation(url: String) {
         apiService.fetchSingleLocation(url: url) { [weak self] location in
-            self?.location = location
+            DispatchQueue.main.async {
+                self?.location = location
+            }
         }
     }
     
     func loadMultipleEpisodes(url: [String]) {
         apiService.fetchMultipleEpisodes(urls: url) { episodes in
-            self.episodes = episodes
+            DispatchQueue.main.async {
+                self.episodes = episodes
+            }
         }
     }
 }

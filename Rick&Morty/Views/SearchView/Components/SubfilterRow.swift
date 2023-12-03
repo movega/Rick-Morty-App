@@ -17,6 +17,6 @@ struct SubfilterRow: View {
                     SubfilterItem(filters: $filters, selectedFilter: filter)
                 }
             }
-        }.padding()
+        }.padding(.horizontal)
     }
 }

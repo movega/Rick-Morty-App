@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LocationsView: View {
-    @ObservedObject var viewModel = CharacterListViewModel()
+    @ObservedObject var viewModel = LocationsViewModel()
     let infoHelper = InfoHelper()
 
     var body: some View {
@@ -16,16 +16,20 @@ struct LocationsView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     infoHelper.sectionTitle("Locations")
-                    ForEach(viewModel.locations) { location in
-                        LocationDetailViewCell(location: location)
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
+                        ForEach(viewModel.locations) { location in
+                            LocationDetailViewCell(location: location)
+                        }
+                        Text("")
+                            .onAppear {
+                                viewModel.loadLocations()
+                            }
                     }
                 }
                 .padding()
             }
             .navigationBarTitle("Rick and Morty Universe", displayMode: .inline)
-            .onAppear {
-                viewModel.loadLocations()
-            }
+            .background(Color.black)
         }
     }
 }

@@ -9,26 +9,28 @@ import SwiftUI
 
 struct EpisodesView: View {
     
-    @ObservedObject var viewModel = CharacterListViewModel()
+    @ObservedObject var viewModel = EpisodesViewModel()
     let infoHelper = InfoHelper()
-
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading) {
                     infoHelper.sectionTitle("Episodes")
-                    ForEach(viewModel.episodes) { episode in
-                        NavigationLink(destination: EpisodesDetailView(viewModel: EpisodesDetailViewModel(episode: episode))) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
+                        ForEach(viewModel.episodes) { episode in
                             EpisodeDetailViewCell(episode: episode)
                         }
+                        Text("")
+                            .onAppear {
+                                viewModel.loadEpisodes()
+                            }
                     }
                 }
                 .padding()
             }
             .navigationBarTitle("Rick and Morty Universe", displayMode: .inline)
-            .onAppear {
-                viewModel.loadEpisodes()
-            }
+            .background(Color.black)
         }
     }
 }

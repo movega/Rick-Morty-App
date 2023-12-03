@@ -1,5 +1,5 @@
 //
-//  CharacterListView.swift
+//  CharactersView.swift
 //  Rick&Morty
 //
 //  Created by Optiva Media on 28/11/23.
@@ -7,29 +7,25 @@
 
 import SwiftUI
 
-struct CharacterListView: View {
-    @ObservedObject var viewModel = CharacterListViewModel()
+struct CharactersView: View {
+    @ObservedObject var viewModel = CharactersViewModel()
     let infoHelper = InfoHelper()
-
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading) {
                     infoHelper.sectionTitle("Characters")
-                    CharacterColumnsView(characters: viewModel.characters)
+                    CharacterColumnsView(characters: viewModel.characters, viewModel: viewModel)
                 }
                 .padding()
             }
             .navigationBarTitle("Rick and Morty Universe", displayMode: .inline)
-            .onAppear {
-                viewModel.loadCharacters()
-            }
+            .background(Color.black)
         }
     }
-    
-    
 }
 
 #Preview {
-    CharacterListView(viewModel: CharacterListViewModel())
+    CharactersView(viewModel: CharactersViewModel())
 }

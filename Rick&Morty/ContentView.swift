@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            CharacterListView(viewModel: CharacterListViewModel())
+            CharactersView(viewModel: CharactersViewModel())
                 .tabItem {
                     Image(systemName: "person")
                     Text("Characters")
@@ -30,6 +30,8 @@ struct ContentView: View {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
                 }
+        }.onAppear {
+            UITabBar.appearance().backgroundColor = UIColor.white
         }
     }
 }

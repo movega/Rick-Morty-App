@@ -20,7 +20,9 @@ class EpisodesDetailViewModel: ObservableObject {
     
     func loadMultipleCharacters(url: [String]) {
         apiService.fetchMultipleCharacters(urls: url) { character in
-            self.character = character
+            DispatchQueue.main.async {
+                self.character = character
+            }
         }
     }
 }

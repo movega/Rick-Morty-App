@@ -26,15 +26,16 @@ struct CharacterCell: View {
                 .shadow(radius: 5)
                 
                 Text(character?.name ?? "")
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.white)
                     .lineLimit(1)
+                    .padding(.horizontal)
             }
             .frame(width: 165, height: 200)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(infoHelper.setUpBorderColor(status: character?.status), lineWidth: 5)
             )
-            .cornerRadius(10)
+            .background(Color.gray).cornerRadius(10)
         }
     }
 }

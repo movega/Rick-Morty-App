@@ -22,10 +22,12 @@ struct SubfilterItem: View {
             }
         }) {
             Text(selectedFilter.name)
-                .padding()
+                .frame(height: 25)
+                .padding(.horizontal)
                 .background(selectedFilter.isSelected ? Color.purple : Color.gray)
                 .foregroundColor(.white)
                 .cornerRadius(8)
+                
         }
     }
 }

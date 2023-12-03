@@ -15,10 +15,10 @@ struct LocationDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                CharacterDetailViewCell(title: "Name", text: viewModel.location?.name)
-                CharacterDetailViewCell(title: "Type", text: viewModel.location?.type)
-                CharacterDetailViewCell(title: "Dimension", text: viewModel.location?.dimension)
-                CharacterDetailViewCell(title: "Type", text: viewModel.location?.created)
+                DetailViewCell(title: "Name", text: viewModel.location?.name)
+                DetailViewCell(title: "Type", text: viewModel.location?.type)
+                DetailViewCell(title: "Dimension", text: viewModel.location?.dimension)
+                DetailViewCell(title: "Type", text: viewModel.location?.created)
                 
                 infoHelper.sectionTitle("Characters")
                 CharacterColumnsView(characters: viewModel.character)
@@ -26,7 +26,8 @@ struct LocationDetailView: View {
         }.onAppear {
             viewModel.loadMultipleCharacters(url: viewModel.location?.residents ?? [])
         }
-        .navigationTitle(viewModel.location?.name ?? "")
+        .navigationTitle(viewModel.location?.name ?? "").foregroundStyle(.white)
+        .background(Color.black)
     }
 }
 
