@@ -24,7 +24,7 @@ struct EpisodeDetailViewCell: View {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.white, lineWidth: 2)
             )
-            .background(Color.gray).cornerRadius(10)
+            .background(Color(hex: "#51bb93")).cornerRadius(10)
         }
     }
 }

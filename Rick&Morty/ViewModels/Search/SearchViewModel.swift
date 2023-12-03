@@ -13,7 +13,11 @@ class SearchViewModel: ObservableObject {
     @Published var episodes: [Episodes]?
     private let apiService: Manager
     
-    var searchFilters: [SearchFilter] = [SearchFilter(name: "Characters", isSelected: false), SearchFilter(name: "Locations", isSelected: false), SearchFilter(name: "Episodes", isSelected: false)]
+    let searchFilters: [SearchFilter] = [SearchFilter(name: "Characters", isSelected: false), SearchFilter(name: "Locations", isSelected: false), SearchFilter(name: "Episodes", isSelected: false)]
+    
+    @Published var characterFilters = [SearchFilter(name: "Name", isSelected: true), SearchFilter(name: "Status", isSelected: false), SearchFilter(name: "Species", isSelected: false), SearchFilter(name: "Type", isSelected: false), SearchFilter(name: "Gender", isSelected: false)]
+    @Published var locationFilters = [SearchFilter(name: "Name", isSelected: true), SearchFilter(name: "Type", isSelected: false), SearchFilter(name: "Dimension", isSelected: false)]
+    @Published var episodeFilters = [SearchFilter(name: "Name", isSelected: true), SearchFilter(name: "Episode", isSelected: false)]
     
     
     init(characters: [Character]? = [], locations: [Locations] = [], episodes: [Episodes]? = [], apiService: Manager = Manager()) {

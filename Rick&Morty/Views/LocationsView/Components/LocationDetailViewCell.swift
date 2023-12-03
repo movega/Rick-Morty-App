@@ -27,7 +27,7 @@ struct LocationDetailViewCell: View {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.white, lineWidth: 2)
             )
-            .background(Color.purple).cornerRadius(10)
+            .background(Color(hex: "#800080")).cornerRadius(10)
         }
     }
 }

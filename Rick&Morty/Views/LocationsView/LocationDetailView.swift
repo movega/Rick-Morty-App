@@ -22,6 +22,7 @@ struct LocationDetailView: View {
                 
                 infoHelper.sectionTitle("Characters")
                 CharacterColumnsView(characters: viewModel.character)
+                    .padding(.bottom)
             }
         }.onAppear {
             viewModel.loadMultipleCharacters(url: viewModel.location?.residents ?? [])

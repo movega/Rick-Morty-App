@@ -16,23 +16,31 @@ struct DetailViewCell: View {
         HStack {
             Text(title)
                 .padding(10)
-                .font(.title2)
                 .foregroundStyle(.white)
+                .font(Font.custom("Baskerville-Bold", size: 24))
             
             Spacer()
             
-            Text(text ?? "Not recorded")
-                .padding(10)
-                .foregroundStyle(.white)
+            if let text = text, !text.isEmpty {
+                Text(text)
+                    .padding(10)
+                    .foregroundStyle(.white)
+                    .font(Font.custom("Courier", size: 16))
+            } else {
+                Text("Not recorded")
+                    .padding(10)
+                    .foregroundStyle(.white)
+                    .font(Font.custom("Courier", size: 16))
+            }
         }
         .frame(width: 350, height: 50)
         .shadow(radius: 5)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(title == "Status" ? infoHelper.setUpBorderColor(status: text ?? "Not recorded") : Color.white, lineWidth: 2)
+                .stroke(title == "Status" ? infoHelper.setUpBorderColor(status: text ?? "Not recorded") : Color(hex: "#b88c8c"), lineWidth: 4)
         )
-        .background(Color.blue.opacity(0.8)).cornerRadius(10)
+        .background(Color(hex: "#107dac")).cornerRadius(10)
     }
 }
 

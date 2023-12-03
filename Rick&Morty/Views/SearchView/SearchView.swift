@@ -13,15 +13,10 @@ struct SearchView: View {
     @State private var searchText = ""
     @State private var isSearching = false
     @State private var selectedFilter: SearchFilter? = nil
-    let infoHelper = InfoHelper()
-    
     @State private var hideCharacters = false
     @State private var hideEpisodes = false
     @State private var hideLocations = false
-    
-    @State var characterFilters = [SearchFilter(name: "Name", isSelected: true), SearchFilter(name: "Status", isSelected: false), SearchFilter(name: "Species", isSelected: false), SearchFilter(name: "Type", isSelected: false), SearchFilter(name: "Gender", isSelected: false)]
-    @State var locationFilters = [SearchFilter(name: "Name", isSelected: true), SearchFilter(name: "Type", isSelected: false), SearchFilter(name: "Dimension", isSelected: false)]
-    @State var episodeFilters = [SearchFilter(name: "Name", isSelected: true), SearchFilter(name: "Episode", isSelected: false)]
+    let infoHelper = InfoHelper()
 
     var body: some View {
         NavigationView {
@@ -36,11 +31,11 @@ struct SearchView: View {
                     if let selectedFilter = selectedFilter {
                         switch selectedFilter.name {
                         case "Characters":
-                            SubfilterRow(filters: $characterFilters)
+                            SubfilterRow(filters: $viewModel.characterFilters)
                         case "Locations":
-                            SubfilterRow(filters: $locationFilters)
+                            SubfilterRow(filters: $viewModel.locationFilters)
                         case "Episodes":
-                            SubfilterRow(filters: $episodeFilters)
+                            SubfilterRow(filters: $viewModel.episodeFilters)
                         default:
                             Spacer()
                         }
@@ -60,6 +55,7 @@ struct SearchView: View {
                         if !hideEpisodes, !(viewModel.episodes?.isEmpty ?? true) {
                             infoHelper.sectionTitle("Episodes")
                             EpisodesRowView(episodes: viewModel.episodes)
+                                .padding(.bottom)
                         }
                     } else {
                         Spacer()
@@ -77,17 +73,17 @@ struct SearchView: View {
         if let selectedFilter = selectedFilter {
             switch selectedFilter.name {
             case "Characters":
-                viewModel.filterCharacters(filters: characterFilters, searchText: searchText)
+                viewModel.filterCharacters(filters: viewModel.characterFilters, searchText: searchText)
                 hideCharacters = false
                 hideLocations = true
                 hideEpisodes = true
             case "Locations":
-                viewModel.filterLocations(filters: locationFilters, searchText: searchText)
+                viewModel.filterLocations(filters: viewModel.locationFilters, searchText: searchText)
                 hideCharacters = true
                 hideLocations = false
                 hideEpisodes = true
             case "Episodes":
-                viewModel.filterEpisodes(filters: episodeFilters, searchText: searchText)
+                viewModel.filterEpisodes(filters: viewModel.episodeFilters, searchText: searchText)
                 hideCharacters = true
                 hideLocations = true
                 hideEpisodes = false
@@ -95,9 +91,9 @@ struct SearchView: View {
                 break
             }
         } else {
-            viewModel.filterCharacters(filters: characterFilters, searchText: searchText)
-            viewModel.filterLocations(filters: locationFilters, searchText: searchText)
-            viewModel.filterEpisodes(filters: episodeFilters, searchText: searchText)
+            viewModel.filterCharacters(filters: viewModel.characterFilters, searchText: searchText)
+            viewModel.filterLocations(filters: viewModel.locationFilters, searchText: searchText)
+            viewModel.filterEpisodes(filters: viewModel.episodeFilters, searchText: searchText)
             hideCharacters = false
             hideLocations = false
             hideEpisodes = false

@@ -17,9 +17,10 @@ struct CharacterColumnsView: View {
                 CharacterCell(character: character)
             }
             if let viewModel = viewModel {
-                Text("").onAppear {
-                    viewModel.loadCharacters()
-                }
+                Text("")
+                    .onAppear {
+                        viewModel.loadCharacters()
+                    }
             }
         }
         .padding(.horizontal)

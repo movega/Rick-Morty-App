@@ -27,7 +27,7 @@ struct SubfilterItem: View {
                 .background(selectedFilter.isSelected ? Color.purple : Color.gray)
                 .foregroundColor(.white)
                 .cornerRadius(8)
-                
+                .font(Font.custom("Baskerville-Bold", size: 20))
         }
     }
 }

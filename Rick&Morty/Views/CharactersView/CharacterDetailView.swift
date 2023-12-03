@@ -30,13 +30,14 @@ struct CharacterDetailView: View {
                 DetailViewCell(title: "Status", text: viewModel.character?.status)
                 DetailViewCell(title: "Gender", text: viewModel.character?.gender)
                 DetailViewCell(title: "Species", text: viewModel.character?.species)
-                DetailViewCell(title: "Type", text: viewModel.character?.type.isEmpty ?? false ? "Not recorded" : viewModel.character?.type)
+                DetailViewCell(title: "Type", text: viewModel.character?.type)
                 
                 infoHelper.sectionTitle("Last seen")
                 LocationDetailViewCell(location: viewModel.location)
                 
                 infoHelper.sectionTitle("Episodes")
                 EpisodesRowView(episodes: viewModel.episodes)
+                    .padding(.bottom)
             }
         }.onAppear {
             viewModel.loadLocation(url: viewModel.character?.location.url ?? "")

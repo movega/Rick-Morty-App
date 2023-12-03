@@ -16,7 +16,7 @@ struct DetailComponent: View {
         HStack {
             Text(title)
                 .padding(10)
-                .font(.title2)
+                .font(Font.custom("Baskerville-Bold", size: 24))
                 .foregroundStyle(.white)
             
             Spacer()
@@ -24,6 +24,7 @@ struct DetailComponent: View {
             Text(text ?? "Not recorded")
                 .padding(10)
                 .foregroundStyle(.white)
+                .font(Font.custom("Courier", size: 16))
         }
     }
 }

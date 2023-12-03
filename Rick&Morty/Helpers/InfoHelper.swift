@@ -25,7 +25,7 @@ class InfoHelper {
     
     public func sectionTitle(_ title: String) -> some View {
         Text(title)
-            .font(.largeTitle)
+            .font(Font.custom("Baskerville-Bold", size: 32))
             .padding(.leading)
             .foregroundStyle(Color.white)
     }

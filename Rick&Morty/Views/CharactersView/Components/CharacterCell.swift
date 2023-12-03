@@ -29,13 +29,14 @@ struct CharacterCell: View {
                     .foregroundStyle(.white)
                     .lineLimit(1)
                     .padding(.horizontal)
+                    .font(Font.custom("Baskerville-Bold", size: 16))
             }
             .frame(width: 165, height: 200)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(infoHelper.setUpBorderColor(status: character?.status), lineWidth: 5)
             )
-            .background(Color.gray).cornerRadius(10)
+            .background(Color(hex: "#e1c094")).cornerRadius(10)
         }
     }
 }
