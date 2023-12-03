@@ -19,7 +19,7 @@ struct SplashView: View {
         } else {
             VStack {
                 VStack {
-                    Image("Prueba")
+                    Image("Splash")
                         .font(.system(size: 100))
                     Text("Rick and Morty App")
                         .font(Font.custom("Baskerville-Bold", size: 32))
